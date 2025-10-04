@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baro Af-Soomaali - Carruurta Waxbarasho Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sound-notice {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .sound-notice h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .lesson-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .lesson-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .lesson-desc {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .lesson-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2) rotate(90deg);
+            color: #f00;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .vocab-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vocab-item::before {
+            content: '🔊';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .vocab-item:hover::before {
+            opacity: 1;
+        }
+
+        .vocab-item:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .vocab-item:active {
+            transform: scale(0.95);
+        }
+
+        .vocab-item.speaking {
+            animation: pulse 0.5s;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .vocab-emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .vocab-somali {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .vocab-english {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .quiz-section {
+            margin-top: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
+            animation: correctAnswer 0.5s;
+        }
+
+        .quiz-option.wrong {
+            background: #f87171;
+            color: white;
+            border-color: #f87171;
+            animation: shake 0.5s;
+        }
+
+        @keyframes correctAnswer {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .speaking-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: slideUp 0.3s;
+            z-index: 2000;
+        }
+
+        .speaking-indicator.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .sound-wave {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .sound-bar {
+            width: 3px;
+            height: 15px;
+            background: white;
+            border-radius: 3px;
+            animation: soundWave 0.5s ease-in-out infinite;
+        }
+
+        .sound-bar:nth-child(1) { animation-delay: 0s; }
+        .sound-bar:nth-child(2) { animation-delay: 0.1s; }
+        .sound-bar:nth-child(3) { animation-delay: 0.2s; }
+
+        @keyframes soundWave {
+            0%, 100% { height: 10px; }
+            50% { height: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vocab-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                📚 Baro Af-Soomaali
+            </div>
+            <nav class="nav">
+                <a href="#home">Hore</a>
+                <a href="#lessons">Casharada</a>
+                <a href="#about">Naga</a>
+                <a href="#contact">Xiriir</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>🌟 Soo Dhawoow Dugsiga Af-Soomaaliga! 🌟</h1>
+        <p>Baro Af-Soomaali si fudud oo xiiso leh!</p>
+        <div class="sound-notice">
+            <h3>🔊 Dhawaaqa waa shaqeynaya!</h3>
+            <p>Riix eray walba si aad u maqasho sida loo dhaho!</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="lessons-grid">
+            <div class="lesson-card" onclick="openLesson('alphabet')">
+                <div class="lesson-icon">🔤</div>
+                <div class="lesson-title">Xarfaha Af-Soomaaliga</div>
+                <div class="lesson-desc">Baro 26-ka xaraf ee Af-Soomaaliga</div>
+                <button class="lesson-btn">Bilow Casharka 🔊</button>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('numbers')">
+                <div class="lesson-icon">🔢</div>
+                <div class="lesson-title">Tirooyinka</div>
+                <div class="lesson-desc">Baro tirooyinka 1-10 Af-Soomaali</div>
+                <button class="lesson-btn">Bilow Casharka 🔊</button>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('greetings')">
+                <div class="lesson-icon">👋</div>
+                <div class="lesson-title">Salaan & Maansooyin</div>
+                <div class="lesson-desc">Baro sida loo salaamo Af-Soomaali</div>
+                <button class="lesson-btn">Bilow Casharka 🔊</button>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('family')">
+                <div class="lesson-icon">👨‍👩‍👧‍👦</div>
+                <div class="lesson-title">Qoyska</div>
+                <div class="lesson-desc">Magacyada xubnaha qoyska</div>
+                <button class="lesson-btn">Bilow Casharka 🔊</button>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('colors')">
+                <div class="lesson-icon">🎨</div>
+                <div class="lesson-title">Midabada</div>
+                <div class="lesson-desc">Baro midabada kala duwan</div>
+                <button class="lesson-btn">Bilow Casharka 🔊</button>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('animals')">
+                <div class="lesson-icon">🦁</div>
+                <div class="lesson-title">Xayawaanka</div>
+                <div class="lesson-desc">Magacyada xayawaanka Af-Soomaali</div>
+                <button class="lesson-btn">Bilow Casharka 🔊</button>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Fudud & Degdeg</div>
+                <div class="feature-desc">Baro si fudud oo degdeg ah</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔊</div>
+                <div class="feature-title">Dhawaaqa Real</div>
+                <div class="feature-desc">Maqal sida erayada loo dhaho</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎮</div>
+                <div class="feature-title">Ciyaaro Xiiso leh</div>
+                <div class="feature-desc">Baro adoo ku ciyaaraya</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <div class="feature-title">Meel kasta</div>
+                <div class="feature-desc">Baro computer iyo mobile</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">100% Ammaan</div>
+                <div class="feature-desc">Ma ururino macluumaad, bilash 100%</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                <div class="feature-title">Kid-Friendly</div>
+                <div class="feature-desc">Carruurta ammaan u leh, ma jiraan xayeysiis</div>
+            </div>
+        </div>
+
+        <!-- Security & Privacy Section -->
+        <div style="background: rgba(255,255,255,0.95); border-radius: 20px; padding: 40px; margin-top: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; color: #667eea; font-size: 32px; margin-bottom: 30px;">
+                🛡️ Amaanka & Privacy
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 15px; border: 2px solid #3b82f6;">
+                    <h3 style="color: #1e40af; margin-bottom: 10px;">🔒 Ma Ururino Macluumaad</h3>
+                    <p style="color: #374151;">Website-kan ma ururino wax macluumaad ah oo personal. Ma jirto registration, login ama data collection.</p>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 20px; border-radius: 15px; border: 2px solid #10b981;">
+                    <h3 style="color: #065f46; margin-bottom: 10px;">✅ 100% Bilash</h3>
+                    <p style="color: #374151;">Waa bilash 100%. Ma jirto lacag, ads, ama hidden fees. Waxbarasho kaliya!</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 20px; border-radius: 15px; border: 2px solid #f59e0b;">
+                    <h3 style="color: #92400e; margin-bottom: 10px;">👶 Carruurta-Friendly</h3>
+                    <p style="color: #374151;">Dhammaan content-ka waa educational oo carruurta u fiican. Ma jiraan inappropriate content.</p>
+                </div>
+                
+                <div style="background: #fce7f3; padding: 20px; border-radius: 15px; border: 2px solid #ec4899;">
+                    <h3 style="color: #9f1239; margin-bottom: 10px;">🚫 Ma Jirto Tracking</h3>
+                    <p style="color: #374151;">Website-kan ma raacin kartaa wixii aad sameyso. Privacy-gaaga waa muhiim.</p>
+                </div>
+                
+                <div style="background: #ede9fe; padding: 20px; border-radius: 15px; border: 2px solid #8b5cf6;">
+                    <h3 style="color: #5b21b6; margin-bottom: 10px;">🔐 Secure Connection</h3>
+                    <p style="color: #374151;">HTTPS encryption waxay ilaalisaa connection-kaaga oo waa ammaan.</p>
+                </div>
+                
+                <div style="background: #dbeafe; padding: 20px; border-radius: 15px; border: 2px solid #3b82f6;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 10px;">👨‍👩‍👧 Parental Guidance</h3>
+                    <p style="color: #374151;">Waxaan ku talinaa in waalidku la joogaan carruurta inta ay internet-ka isticmaalayaan.</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 25px; border-radius: 15px; text-align: center;">
+                <h3 style="font-size: 24px; margin-bottom: 10px;">✅ Certified Safe for Kids</h3>
+                <p style="font-size: 16px; opacity: 0.9;">Waxbarasho ammaan ah, bilash ah, oo carruurta u fiican!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Speaking Indicator -->
+    <div id="speakingIndicator" class="speaking-indicator">
+        <div class="sound-wave">
+            <div class="sound-bar"></div>
+            <div class="sound-bar"></div>
+            <div class="sound-bar"></div>
+        </div>
+        <span id="speakingText">Waan hadlayaa...</span>
+    </div>
+
+    <!-- Modal for Lessons -->
+    <div id="lessonModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Text-to-Speech functionality
+        let currentUtterance = null;
+
+        function speak(text, element) {
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            // Add visual feedback
+            if (element) {
+                element.classList.add('speaking');
+                setTimeout(() => element.classList.remove('speaking'), 500);
+            }
+
+            // Show speaking indicator
+            const indicator = document.getElementById('speakingIndicator');
+            const speakingText = document.getElementById('speakingText');
+            speakingText.textContent = text;
+            indicator.classList.add('active');
+
+            // Create speech
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.lang = 'so-SO'; // Somali language
+            currentUtterance.rate = 0.8; // Slightly slower for learning
+            currentUtterance.pitch = 1.1; // Slightly higher pitch
+            currentUtterance.volume = 1;
+
+            // Hide indicator when done
+            currentUtterance.onend = () => {
+                indicator.classList.remove('active');
+            };
+
+            currentUtterance.onerror = () => {
+                indicator.classList.remove('active');
+            };
+
+            // Speak
+            window.speechSynthesis.speak(currentUtterance);
+        }
+
+        const lessons = {
+            alphabet: {
+                title: '🔤 Xarfaha Af-Soomaaliga',
+                content: `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Xarfaha Af-Soomaaliga</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">🔊 Riix xaraf walba si aad u maqasho!</p>
+                    <div class="vocab-grid">
+                        ${['A', 'B', 'T', 'J', 'X', 'KH', 'D', 'R', 'S', 'SH', 'DH', 'C', 'G', 'F', 'Q', 'K', 'L', 'M', 'N', 'W', 'H', 'Y'].map(letter => 
+                            `<div class="vocab-item" onclick="speak('${letter}', this)">
+                                <div class="vocab-emoji">${letter}</div>
+                                <div class="vocab-somali">${letter}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `
+            },
+            numbers: {
+                title: '🔢 Tirooyinka',
+                content: `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Tirooyinka 1-10</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">🔊 Riix tiro walba si aad u maqasho!</p>
+                    <div class="vocab-grid">
+                        ${[
+                            {emoji: '1️⃣', somali: 'Kow', english: 'One'},
+                            {emoji: '2️⃣', somali: 'Laba', english: 'Two'},
+                            {emoji: '3️⃣', somali: 'Saddex', english: 'Three'},
+                            {emoji: '4️⃣', somali: 'Afar', english: 'Four'},
+                            {emoji: '5️⃣', somali: 'Shan', english: 'Five'},
+                            {emoji: '6️⃣', somali: 'Lix', english: 'Six'},
+                            {emoji: '7️⃣', somali: 'Todobo', english: 'Seven'},
+                            {emoji: '8️⃣', somali: 'Sideed', english: 'Eight'},
+                            {emoji: '9️⃣', somali: 'Sagaal', english: 'Nine'},
+                            {emoji: '🔟', somali: 'Toban', english: 'Ten'}
+                        ].map(num => 
+                            `<div class="vocab-item" onclick="speak('${num.somali}', this)">
+                                <div class="vocab-emoji">${num.emoji}</div>
+                                <div class="vocab-somali">${num.somali}</div>
+                                <div class="vocab-english">${num.english}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                    <div class="quiz-section">
+                        <h3 style="color: #667eea; margin: 30px 0 20px;">📝 Su'aal: Maxay tahay "Three" Af-Soomaali?</h3>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'Laba')">Laba</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'Saddex')">Saddex</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'Afar')">Afar</div>
+                        </div>
+                    </div>
+                `
+            },
+            greetings: {
+                title: '👋 Salaan & Maansooyin',
+                content: `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Salaan & Maansooyin</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">🔊 Riix si aad u maqasho sida loo salaamo!</p>
+                    <div class="vocab-grid">
+                        ${[
+                            {emoji: '👋', somali: 'Salaan', english: 'Hello'},
+                            {emoji: '🌅', somali: 'Subax wanaagsan', english: 'Good morning'},
+                            {emoji: '🌆', somali: 'Galab wanaagsan', english: 'Good afternoon'},
+                            {emoji: '🌙', somali: 'Habeen wanaagsan', english: 'Good night'},
+                            {emoji: '❓', somali: 'Sidee tahay', english: 'How are you'},
+                            {emoji: '😊', somali: 'Waan fiicnahay', english: 'I am fine'},
+                            {emoji: '🙏', somali: 'Mahadsanid', english: 'Thank you'},
+                            {emoji: '👋', somali: 'Nabadgelyo', english: 'Goodbye'}
+                        ].map(greeting => 
+                            `<div class="vocab-item" onclick="speak('${greeting.somali}', this)">
+                                <div class="vocab-emoji">${greeting.emoji}</div>
+                                <div class="vocab-somali">${greeting.somali}</div>
+                                <div class="vocab-english">${greeting.english}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `
+            },
+            family: {
+                title: '👨‍👩‍👧‍👦 Qoyska',
+                content: `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Xubnaha Qoyska</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">🔊 Riix si aad u maqasho magacyada qoyska!</p>
+                    <div class="vocab-grid">
+                        ${[
+                            {emoji: '👨', somali: 'Aabe', english: 'Father'},
+                            {emoji: '👩', somali: 'Hooyo', english: 'Mother'},
+                            {emoji: '👦', somali: 'Wiil', english: 'Boy'},
+                            {emoji: '👧', somali: 'Gabadh', english: 'Girl'},
+                            {emoji: '👴', somali: 'Awoowe', english: 'Grandfather'},
+                            {emoji: '👵', somali: 'Ayeeyo', english: 'Grandmother'},
+                            {emoji: '👨‍👦', somali: 'Walaal', english: 'Sibling'},
+                            {emoji: '👶', somali: 'Ilmo yar', english: 'Baby'}
+                        ].map(member => 
+                            `<div class="vocab-item" onclick="speak('${member.somali}', this)">
+                                <div class="vocab-emoji">${member.emoji}</div>
+                                <div class="vocab-somali">${member.somali}</div>
+                                <div class="vocab-english">${member.english}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `
+            },
+            colors: {
+                title: '🎨 Midabada',
+                content: `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Midabada</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">🔊 Riix midab walba si aad u maqasho!</p>
+                    <div class="vocab-grid">
+                        ${[
+                            {emoji: '🔴', somali: 'Cas', english: 'Red'},
+                            {emoji: '🔵', somali: 'Buluug', english: 'Blue'},
+                            {emoji: '🟢', somali: 'Cagaar', english: 'Green'},
+                            {emoji: '🟡', somali: 'Jaale', english: 'Yellow'},
+                            {emoji: '🟠', somali: 'Oranjo', english: 'Orange'},
+                            {emoji: '🟣', somali: 'Guduud', english: 'Purple'},
+                            {emoji: '⚫', somali: 'Madow', english: 'Black'},
+                            {emoji: '⚪', somali: 'Caddaan', english: 'White'}
+                        ].map(color => 
+                            `<div class="vocab-item" onclick="speak('${color.somali}', this)">
+                                <div class="vocab-emoji">${color.emoji}</div>
+                                <div class="vocab-somali">${color.somali}</div>
+                                <div class="vocab-english">${color.english}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `
+            },
+            animals: {
+                title: '🦁 Xayawaanka',
+                content: `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Xayawaanka</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">🔊 Riix xayawaan walba si aad u maqasho!</p>
+                    <div class="vocab-grid">
+                        ${[
+                            {emoji: '🦁', somali: 'Libaax', english: 'Lion'},
+                            {emoji: '🐪', somali: 'Geel', english: 'Camel'},
+                            {emoji: '🐐', somali: 'Ri', english: 'Goat'},
+                            {emoji: '🐑', somali: 'Ido', english: 'Sheep'},
+                            {emoji: '🐄', somali: 'Sac', english: 'Cow'},
+                            {emoji: '🐎', somali: 'Faras', english: 'Horse'},
+                            {emoji: '🐕', somali: 'Eey', english: 'Dog'},
+                            {emoji: '🐈', somali: 'Bisad', english: 'Cat'},
+                            {emoji: '🐓', somali: 'Diiq', english: 'Rooster'},
+                            {emoji: '🐟', somali: 'Kalluun', english: 'Fish'}
+                        ].map(animal => 
+                            `<div class="vocab-item" onclick="speak('${animal.somali}', this)">
+                                <div class="vocab-emoji">${animal.emoji}</div>
+                                <div class="vocab-somali">${animal.somali}</div>
+                                <div class="vocab-english">${animal.english}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `
+            }
+        };
+
+        function openLesson(lessonId) {
+            const modal = document.getElementById('lessonModal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = lessons[lessonId].content;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('lessonModal');
+            modal.classList.remove('active');
+            window.speechSynthesis.cancel(); // Stop any ongoing speech
+        }
+
+        function checkAnswer(element, isCorrect, text) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                speak(text);
+                setTimeout(() => {
+                    speak('Saxiix! Waa jawaab sax ah!');
+                }, 1000);
+            } else {
+                element.classList.add('wrong');
+                setTimeout(() => {
+                    speak('Khalad! Isku day mar kale!');
+                }, 100);
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('lessonModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Load voices when available
+        window.speechSynthesis.onvoiceschanged = function() {
+            const voices = window.speechSynthesis.getVoices();
+            console.log('Available voices:', voices.length);
+        };
+    </script>
+</body>
+</html>
